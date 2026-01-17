@@ -1,4 +1,4 @@
-import { api } from "./api";
+import { api } from "./http";
 export const getLoans = () => api.get("/Loan");
 export const getLoan = (id) => api.get(`/Loan/${id}`);
 export const createLoan = (data) => api.post("/Loan", data);

@@ -1,4 +1,4 @@
-import { api } from "./api";
+import { api } from "./http";
 
 export const getUsers = () => api.get("/User");
 export const getUserById = (id) => api.get(`/User/${id}`);

@@ -1,4 +1,4 @@
-import { api } from './api';
+import { api } from "./http";
 export const getAuthors = () => api.get("/Author");
 export const getAuthorById = (id) => api.get(`/Author/${id}`);
 export const createAuthor = (data) => api.post("/Author", data);

@@ -1,5 +1,5 @@
 // src/api/booksService.js
-import { api } from "./api";
+import { api } from "./http";
 
 // CRUD de libros
 export const getBooks = () => api.get("/Book");

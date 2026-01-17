@@ -1,4 +1,4 @@
-import { api } from "./api";
+import { api } from "./http";
 
 export const getCategories = () => api.get("/category");
 export const createCategory = (data) => api.post("/category", data);
