@@ -19,7 +19,7 @@ import DeleteModal from "../Users/DeleteModal";
 import AuthorModal from "../Authors/AuthorModal";
 import CategoryModal from "../Categories/CategoryModal";
 
-import { FiPlus } from "react-icons/fi";
+import { FiPlus, FiSearch, FiX } from "react-icons/fi";
 import toast from "react-hot-toast";
 
 export default function Books() {
@@ -207,15 +207,29 @@ export default function Books() {
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-2xl font-bold">Gestión de libros</h1>
       </div>
-
+{/* Search */}
+      <div className="mb-4">
+        <div className="relative">
+          <FiSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" />
       <input
         type="text"
         placeholder="Buscar por título, autor o categoría..."
         value={search}
         onChange={(e) => setSearch(e.target.value)}
-        className="w-full max-w-lg mb-6 px-4 py-2 border rounded-lg shadow-sm
-                   focus:ring-2 focus:ring-blue-500 outline-none"
-      />
+        className="w-full pl-11 pr-11 py-2.5 px-4 py-2.5 rounded-full border border-gray-300 
+                     shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+      />{search.trim() && (
+                  <button
+                    onClick={() => setSearch("")}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 p-2 rounded-full hover:bg-gray-100 transition"
+                    title="Limpiar"
+                  >
+                    <FiX className="text-gray-500" />
+                  </button>
+                )}
+      </div>
+      </div>
+
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 xl:grid-cols-5 grap-6">
         {filteredBooks.map((book) => (
