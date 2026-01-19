@@ -110,105 +110,109 @@ export default function Authors() {
   };
 
   return (
-    <div className="p-6 text-black">
-      <div className="max-w-bg-white rounded-xl shadow overflow-hidden w-full">
+    <div className="p-4 sm:p-6 lg:p-8">
+      <div className="bg-white rounded-xl shadow overflow-hidden">
         {/* Header */}
-        <div className="flex items-start md:items-center justify-between gap-4 mb-5">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 sm:gap-6 p-4 sm:p-6 pb-3 sm:pb-6">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">Autores</h1>
-            <p className="text-sm text-gray-500 mt-1">
-              Administra autores y controla si tienen libros asociados.
+            <h1 className="text-xl sm:text-2xl font-bold text-gray-900">Autores</h1>
+            <p className="text-xs sm:text-sm text-gray-500 mt-1">
+              Administra autores y controla libros asociados.
             </p>
-
-           
           </div>
 
           <button
             onClick={handleCreate}
-            className="flex items-center gap-2 px-4 py-2 rounded-full bg-blue-600 text-white text-xl font-medium shadow hover:bg-blue-700 transition active:scale-[0.98]"
+            className="w-full sm:w-auto flex items-center justify-center gap-1.5 px-5 py-2 
+                     bg-blue-600 hover:bg-blue-700 text-white font-medium text-sm 
+                     rounded-full shadow transition-colors whitespace-nowrap"
           >
-            <FiPlus /> Nuevo autor
+            <FiPlus className="w-4 h-4 sm:w-5 sm:h-5" />
+            Nuevo
           </button>
         </div>
 
-        {/* Search */}
-        <div className="mb-4">
+        {/* Buscador más compacto */}
+        <div className="px-4 sm:px-6 pb-3 sm:pb-6">
           <div className="relative">
-            <FiSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" />
+            <FiSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-4 h-4 sm:w-5 sm:h-5" />
             <input
               type="text"
               placeholder="Buscar autor..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="w-full pl-11 pr-11 py-2.5 rounded-full border border-gray-300 bg-white shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full pl-9 sm:pl-11 pr-9 sm:pr-11 py-2 sm:py-2.5 
+                       rounded-full border border-gray-300 bg-white shadow-sm 
+                       focus:outline-none focus:ring-2 focus:ring-blue-500 
+                       transition-all text-sm sm:text-base"
             />
             {search.trim() && (
               <button
                 onClick={() => setSearch("")}
-                className="absolute right-3 top-1/2 -translate-y-1/2 p-2 rounded-full hover:bg-gray-100 transition"
-                title="Limpiar"
+                className="absolute right-2 top-1/2 -translate-y-1/2 
+                         p-1 sm:p-2 rounded-full hover:bg-gray-100 transition"
               >
-                <FiX className="text-gray-500" />
+                <FiX className="w-4 h-4 sm:w-5 sm:h-5 text-gray-500" />
               </button>
             )}
           </div>
         </div>
 
-        {/* List */}
-        <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
-          {filtered.length === 0 ? (
-            <div className="px-6 py-12 text-center">
-              <p className="text-gray-500 font-medium">
-                {authors.length === 0 ? "No hay autores registrados" : "No se encontraron autores"}
-              </p>
-              <p className="text-gray-400 text-sm mt-1">
-                {authors.length === 0
-                  ? "Crea un nuevo autor para comenzar."
-                  : "Prueba con otro término de búsqueda."}
-              </p>
-            </div>
-          ) : (
-            <div className="py-1">
-              {filtered.map((author) => {
-                const booksCount = booksCountByAuthor(author);
-                return (
-                  <AuthorRow
-                    key={author.id}
-                    author={author}
-                    booksCount={booksCount}
-                    onEdit={handleEdit}
-                    onDelete={handleDeleteClick}
-                    onViewBooks={handleViewBooks}
-                  />
-                );
-              })}
-            </div>
-          )}
+        {/* Lista - muy compacta en móvil, sin scroll horizontal excesivo */}
+        <div className="overflow-x-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent">
+          <div className="min-w-[480px] sm:min-w-[580px] md:min-w-full px-2 sm:px-0">
+            {filtered.length === 0 ? (
+              <div className="px-4 sm:px-6 py-8 sm:py-12 text-center text-gray-600 text-sm">
+                <p className="font-medium">
+                  {authors.length === 0 ? "No hay autores" : "Sin resultados"}
+                </p>
+                <p className="mt-1 text-xs sm:text-sm">
+                  {authors.length === 0 ? "Crea uno nuevo" : "Cambia la búsqueda"}
+                </p>
+              </div>
+            ) : (
+              <div className="divide-y divide-gray-100">
+                {filtered.map((author) => {
+                  const booksCount = booksCountByAuthor(author);
+                  return (
+                    <AuthorRow
+                      key={author.id}
+                      author={author}
+                      booksCount={booksCount}
+                      onEdit={handleEdit}
+                      onDelete={handleDeleteClick}
+                      onViewBooks={handleViewBooks}
+                    />
+                  );
+                })}
+              </div>
+            )}
+          </div>
         </div>
-
-        {/* Modals */}
-        <AuthorModal
-          isOpen={openModal}
-          onClose={() => setOpenModal(false)}
-          onSubmit={handleSave}
-          current={current}
-          allAuthors={authors}
-        />
-
-        <BooksByAuthorModal
-          isOpen={openBooksModal}
-          onClose={() => setOpenBooksModal(false)}
-          author={current}
-          books={books}
-        />
-
-        <DeleteModal
-          isOpen={openDelete}
-          onClose={() => setOpenDelete(false)}
-          onConfirm={handleDelete}
-          itemName={current?.fullName}
-        />
       </div>
+
+      {/* Modals */}
+      <AuthorModal
+        isOpen={openModal}
+        onClose={() => setOpenModal(false)}
+        onSubmit={handleSave}
+        current={current}
+        allAuthors={authors}
+      />
+
+      <BooksByAuthorModal
+        isOpen={openBooksModal}
+        onClose={() => setOpenBooksModal(false)}
+        author={current}
+        books={books}
+      />
+
+      <DeleteModal
+        isOpen={openDelete}
+        onClose={() => setOpenDelete(false)}
+        onConfirm={handleDelete}
+        itemName={current?.fullName}
+      />
     </div>
   );
 }
