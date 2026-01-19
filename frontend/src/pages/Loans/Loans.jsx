@@ -5,7 +5,7 @@ import { getUsers } from "../../api/usersService";
 import { getBooks } from "../../api/booksService";
 import LoanModal from "./LoanModal";
 import DeleteModal from "../Users/DeleteModal";
-import { FiPlus, FiSearch,FiCheckCircle, FiClock } from "react-icons/fi";
+import { FiPlus, FiSearch,FiCheckCircle, FiClock,FiX } from "react-icons/fi";
 import toast from "react-hot-toast";
 
 export default function Loans() {

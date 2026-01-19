@@ -110,57 +110,77 @@ export default function Authors() {
   };
 
   return (
-    <div className="p-4 sm:p-6 lg:p-8">
-      <div className="bg-white rounded-xl shadow overflow-hidden">
-        {/* Header */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 sm:gap-6 p-4 sm:p-6 pb-3 sm:pb-6">
-          <div>
-            <h1 className="text-xl sm:text-2xl font-bold text-gray-900">Autores</h1>
-            <p className="text-xs sm:text-sm text-gray-500 mt-1">
-              Administra autores y controla libros asociados.
-            </p>
+    // ✅ Importante: centrado en móvil + max-width, sin afectar desktop
+    <div className="px-3 py-4 sm:p-6 lg:p-8">
+      <div
+        className="
+          w-full
+          mx-auto
+          max-w-[420px] sm:max-w-none
+        "
+      >
+        <div className="bg-white rounded-xl shadow overflow-hidden">
+          {/* Header */}
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 sm:gap-6 p-4 sm:p-6 pb-3 sm:pb-6">
+            <div>
+              <h1 className="text-xl sm:text-2xl font-bold text-gray-900">Autores</h1>
+              <p className="text-xs sm:text-sm text-gray-500 mt-1">
+                Administra autores y controla libros asociados.
+              </p>
+            </div>
+
+            <button
+              onClick={handleCreate}
+              className="
+                w-full sm:w-auto
+                flex items-center justify-center gap-1.5
+                px-5 py-2
+                bg-blue-600 hover:bg-blue-700 text-white
+                font-medium text-sm
+                rounded-full shadow transition-colors
+                whitespace-nowrap
+              "
+            >
+              <FiPlus className="w-4 h-4 sm:w-5 sm:h-5" />
+              Nuevo
+            </button>
           </div>
 
-          <button
-            onClick={handleCreate}
-            className="w-full sm:w-auto flex items-center justify-center gap-1.5 px-5 py-2 
-                     bg-blue-600 hover:bg-blue-700 text-white font-medium text-sm 
-                     rounded-full shadow transition-colors whitespace-nowrap"
-          >
-            <FiPlus className="w-4 h-4 sm:w-5 sm:h-5" />
-            Nuevo
-          </button>
-        </div>
-
-        {/* Buscador más compacto */}
-        <div className="px-4 sm:px-6 pb-3 sm:pb-6">
-          <div className="relative">
-            <FiSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-4 h-4 sm:w-5 sm:h-5" />
-            <input
-              type="text"
-              placeholder="Buscar autor..."
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              className="w-full pl-9 sm:pl-11 pr-9 sm:pr-11 py-2 sm:py-2.5 
-                       rounded-full border border-gray-300 bg-white shadow-sm 
-                       focus:outline-none focus:ring-2 focus:ring-blue-500 
-                       transition-all text-sm sm:text-base"
-            />
-            {search.trim() && (
-              <button
-                onClick={() => setSearch("")}
-                className="absolute right-2 top-1/2 -translate-y-1/2 
-                         p-1 sm:p-2 rounded-full hover:bg-gray-100 transition"
-              >
-                <FiX className="w-4 h-4 sm:w-5 sm:h-5 text-gray-500" />
-              </button>
-            )}
+          {/* Buscador */}
+          <div className="px-4 sm:px-6 pb-3 sm:pb-6">
+            <div className="relative">
+              <FiSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-4 h-4 sm:w-5 sm:h-5" />
+              <input
+                type="text"
+                placeholder="Buscar autor..."
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                className="
+                  w-full
+                  pl-9 sm:pl-11 pr-9 sm:pr-11
+                  py-2 sm:py-2.5
+                  rounded-full border border-gray-300 bg-white shadow-sm
+                  focus:outline-none focus:ring-2 focus:ring-blue-500
+                  transition-all text-sm sm:text-base
+                "
+              />
+              {search.trim() && (
+                <button
+                  onClick={() => setSearch("")}
+                  className="
+                    absolute right-2 top-1/2 -translate-y-1/2
+                    p-1 sm:p-2 rounded-full hover:bg-gray-100 transition
+                  "
+                  title="Limpiar"
+                >
+                  <FiX className="w-4 h-4 sm:w-5 sm:h-5 text-gray-500" />
+                </button>
+              )}
+            </div>
           </div>
-        </div>
 
-        {/* Lista - muy compacta en móvil, sin scroll horizontal excesivo */}
-        <div className="overflow-x-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent">
-          <div className="min-w-[480px] sm:min-w-[580px] md:min-w-full px-2 sm:px-0">
+          {/* ✅ Lista SIN min-width (para evitar scroll horizontal en móvil) */}
+          <div className="px-2 sm:px-0">
             {filtered.length === 0 ? (
               <div className="px-4 sm:px-6 py-8 sm:py-12 text-center text-gray-600 text-sm">
                 <p className="font-medium">

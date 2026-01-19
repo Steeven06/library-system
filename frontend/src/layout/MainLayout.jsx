@@ -38,7 +38,7 @@ export default function MainLayout() {
       <div className="flex-1 flex flex-col relative z-10">
         <Topbar setIsOpen={setIsOpen} />
 
-        <main className="flex-1 p-6">
+        <main className="flex-1 px-3 py-4 sm:p-6 lg:p-8">
           <Outlet />
         </main>
       </div>

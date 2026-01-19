@@ -3,7 +3,7 @@ import { getUsers, createUser, updateUser, deleteUser } from "../../api/usersSer
 import UserModal from "./UserModal.jsx";
 import DeleteModal from "./DeleteModal";
 import toast from "react-hot-toast";
-import { FiPlus,FiSearch, FiEdit, FiTrash } from "react-icons/fi";
+import { FiPlus,FiSearch, FiEdit, FiTrash, FiX } from "react-icons/fi";
 
 export default function Users() {
   const [users, setUsers] = useState([]);
