@@ -1,104 +1,126 @@
-# 📚 Library Management System
+# 📚 Library System
 
-Sistema de gestión de biblioteca desarrollado con **arquitectura limpia (Clean Architecture)**, orientado a buenas prácticas de desarrollo, escalabilidad y despliegue moderno usando **Docker**.
+Sistema de gestión de biblioteca desarrollado como proyecto **Full Stack**, con frontend minimalista y backend desacoplado mediante una API REST.
 
-Este proyecto forma parte de mi **portafolio profesional** como desarrollador de software.
+El sistema permite administrar de forma centralizada:
 
----
+- 📖 Libros
+- ✍️ Autores
+- 🗂️ Categorías
+- 👤 Usuarios
+- 🔄 Préstamos
 
-## 🚀 Tecnologías Utilizadas
-
-### Backend
-- **.NET (ASP.NET Core Web API)**
-- **Entity Framework Core**
-- **PostgreSQL**
-- **Arquitectura Clean (Domain / Application / Infrastructure / API)**
-- **Docker & Docker Compose**
-- **Swagger (OpenAPI)**
-
-### Frontend
-- **React**
-- **Tailwind CSS**
-- **Axios**
-- **React Hooks**
-- **Componentización y modales reutilizables**
+El proyecto está pensado como **portafolio personal**, aplicando buenas prácticas de arquitectura, separación de responsabilidades y despliegue en la nube.
 
 ---
+## 🚀 Demo en producción
 
-## 🧱 Arquitectura del Proyecto
+🌐 https://library-systemf.vercel.app/
+--
 
-El backend está organizado siguiendo **Clean Architecture**, separando responsabilidades:
-LibrarySystem
-│
-├── LibrarySystem.Domain # Entidades y contratos del dominio
-├── LibrarySystem.Application # Lógica de negocio y servicios
-├── LibrarySystem.Infrastructure # Acceso a datos (EF Core, PostgreSQL)
-└── LibrarySystem.Api # API REST (Controllers, Swagger)
+## 🧪 Tecnologías Utilizadas
 
-Beneficios:
-- Bajo acoplamiento
-- Alta mantenibilidad
-- Fácil testeo
-- Escalable a futuro
+### 🔹Backend
+- ASP.NET Core
+- Entity Framework Core
+- PostgreSQL
+- Swagger (OpenAPI)
 
----
+### 🔹Frontend
+- React
+- Vite
+- Tailwind CSS
+- Axios
+- React Router
 
-## 📦 Funcionalidades Principales
-
-### 📖 Libros
-- Crear, editar y eliminar libros
-- Asignar autor y categoría
-- Control de cantidad total y disponibilidad
-- Soporte para portada (URL de imagen)
-- Validaciones de datos
-
-### ✍️ Autores
-- CRUD completo
-- Visualización de libros por autor
-- Restricción de eliminación si tiene libros asociados
-
-### 🗂️ Categorías
-- CRUD completo
-- Contador de libros por categoría
-- Restricción de eliminación si tiene libros asociados
-
-### 👤 Usuarios
-- Gestión completa de usuarios
-- Validaciones de datos
-
-### 🔄 Préstamos
-- Registro de préstamos
-- Validación de disponibilidad
-- Manejo de fechas en **UTC**
-- Control automático de stock
-
----
-
-## 🐳 Docker & Base de Datos
-
-El proyecto utiliza **Docker Compose** para levantar:
-
-- API (.NET)
-- Base de datos **PostgreSQL**
-
-### Servicios:
-- `library_api`
-- `library_db`
-
-Con esto, **no es necesario instalar PostgreSQL localmente**.
-
----
-
-## ▶️ Cómo ejecutar el proyecto (Docker)
-
-### Requisitos
+### 🔹Infraestructura
 - Docker
-- Docker Compose
+- Railway
+- Vercel
+- GitHub
 
-### Pasos
 
-1. Clonar el repositorio:
+
+---
+
+## 🧱 Arquitectura del sistema
+
+El proyecto sigue una arquitectura **cliente-servidor** desacoplada:
+### 🔹 Frontend
+- Aplicación SPA desarrollada con **React + Vite**
+- Consume la API REST mediante **Axios**
+- Manejo de estados y componentes reutilizables
+- Diseño responsive (desktop y móvil)
+
+### 🔹 Backend
+- API REST con **ASP.NET Core**
+- Arquitectura en capas:
+  - **API**
+  - **Application**
+  - **Domain**
+  - **Infrastructure**
+- Entity Framework Core como ORM
+- Base de datos PostgreSQL
+
+### 🔹 Contenedorización
+- Backend dockerizado con **Docker**
+- Variables de entorno para configuración segura
+- Ideal para despliegue en la nube
+
+---
+
+## ✨ Funcionalidades
+
+- Gestión de **Autores**
+- Gestión de **Libros**
+- Gestión de **Usuarios**
+- Gestión de **Préstamos**
+- UI responsive (desktop y móvil)
+- Consumo de API REST
+- Validaciones y control de errores
+
+---
+
+## 🖥️ Ejecutar en local (resumen)
+
 ```bash
-git clone https://github.com/tu-usuario/library-management-system.git
-cd library-management-system
+git clone https://github.com/Steeven06/library-system.git
+cd library-system
+```
 
+### 🔹Frontend
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+### 🔹Configurar .env:
+```bash
+VITE_API_URL=http://localhost:8080/api
+```
+
+### 🔹Backend
+```bash
+cd backend
+dotnet restore
+dotnet run
+```
+---
+## 🐳 Docker (Backend)
+
+El backend está preparado para ejecutarse en contenedores Docker, utilizando variables de entorno para conexión a base de datos y puerto. 
+### Build de la imagen
+```bash
+docker build -t library-system-api .
+```
+---
+## 📌 Notas
+- **Proyecto enfocado en arquitectura, buenas prácticas y despliegue**
+- **No incluye autenticación (pensado como demo/portafolio)**
+- **Backend desplegado como API REST independiente**
+---
+## 👤 Autor
+**STEEVEN ISAIAS JIMENEZ**
+
+🎓Desarrollador de Software.
